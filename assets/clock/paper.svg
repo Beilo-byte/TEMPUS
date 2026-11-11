@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" fill="none">
+
+<defs>
+  <radialGradient id="paper" cx="48%" cy="43%" r="67%">
+    <stop offset="0%" stop-color="#fffaf1"/>
+    <stop offset="72%" stop-color="#f7f0e4"/>
+    <stop offset="100%" stop-color="#e9dfd0"/>
+  </radialGradient>
+  <filter id="fibers" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.53" numOctaves="3" seed="18" result="noise"/>
+    <feColorMatrix in="noise" type="saturate" values="0" result="gray"/>
+    <feComponentTransfer in="gray" result="faint">
+      <feFuncA type="linear" slope="0.075"/>
+    </feComponentTransfer>
+    <feBlend in="SourceGraphic" in2="faint" mode="multiply"/>
+  </filter>
+</defs>
+<rect x="0" y="0" width="900" height="900" fill="url(#paper)"/>
+<rect x="0" y="0" width="900" height="900" fill="#a99477" opacity="0.025" filter="url(#fibers)"/>
+
+</svg>

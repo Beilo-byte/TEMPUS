@@ -1,0 +1,38 @@
+{
+  "size": [
+    900,
+    900
+  ],
+  "pivot": [
+    450.0,
+    450.0
+  ],
+  "layers_bottom_to_top": [
+    "paper.svg",
+    "dial.svg",
+    "hour/{index:03d}.svg",
+    "minute/{index:03d}.svg",
+    "second/{index:03d}.svg",
+    "pin.svg"
+  ],
+  "counts": {
+    "hour": 720,
+    "minute": 60,
+    "second": 60
+  },
+  "indices_from_hms": {
+    "hour": "((hour % 12) * 60 + minute) % 720",
+    "minute": "minute % 60",
+    "second": "second % 60"
+  },
+  "example_01_24_36": {
+    "hour": 84,
+    "minute": 24,
+    "second": 36
+  },
+  "example_00_00_00": {
+    "hour": 0,
+    "minute": 0,
+    "second": 0
+  }
+}
