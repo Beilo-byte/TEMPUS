@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#e9e9df">
+    <meta name="description" content="Un compte enrere visual amb un rellotge de paper i un fons que canvia amb el temps.">
+    <title>TEMPUS · Compte enrere visual</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body data-skin="editorial" data-view="desk">
+    <main id="app-shell" class="app-shell">
+      <section id="stage" class="stage" aria-label="Rellotge i fons visual" style="--clock-opacity: .70">
+        <div class="stage-media" aria-hidden="true">
+          <video id="background-video" class="background-media" muted playsinline preload="metadata" hidden></video>
+          <img id="background-image" class="background-media" alt="" hidden>
+        </div>
+
+        <div class="clock-overlay" aria-label="Rellotge de compte enrere">
+          <div class="dial-stack" aria-hidden="true">
+            <img id="dial-base" class="dial-layer" src="./assets/clock/dial.svg" alt="">
+            <img id="hour-hand" class="dial-layer" alt="">
+            <img id="minute-hand" class="dial-layer" alt="">
+            <img id="second-hand" class="dial-layer" alt="">
+            <img id="clock-pin" class="dial-layer" src="./assets/clock/pin.svg" alt="">
+          </div>
+        </div>
+
+        <button id="exit-fullscreen" class="exit-fullscreen" type="button" aria-label="Sortir de pantalla completa">Sortir de pantalla completa <span aria-hidden="true">↘</span></button>
+      </section>
+
+      <aside id="control-panel" class="control-panel" aria-label="Controls del compte enrere">
+        <details id="options-menu" class="options-menu">
+          <summary aria-label="Obrir opcions i escenes"><span aria-hidden="true">☷</span> Opcions</summary>
+          <div class="options-card">
+            <h2>Opcions i escenes</h2>
+            <label for="view-select">Forma de veure-ho</label>
+            <select id="view-select">
+              <option value="desk" selected>Taula · rellotge gran i controls</option>
+              <option value="projection">Projecció · imatge protagonista</option>
+            </select>
+            <label for="skin-select">Aspecte de l'aplicació</label>
+            <select id="skin-select">
+              <option value="notebook">A · Quadern de classe</option>
+              <option value="wood">B · Taula de fusta</option>
+              <option value="editorial" selected>C · Editorial clara</option>
+              <option value="dark">D · Fosc per projectar</option>
+            </select>
+            <label for="preset-select">Escena preparada</label>
+            <select id="preset-select">
+              <option value="custom">Configuració lliure</option>
+              <option value="polaroids" data-background="polaroids" data-duration="180" selected>Polaroids del temps · 3 min</option>
+              <option value="flor" data-background="flor" data-duration="180">Flor que s'obre · 3 min</option>
+              <option value="posta" data-background="posta" data-duration="180">Posta de sol · 3 min</option>
+              <option value="gel" data-background="gel" data-duration="180">Glaçó de gel · 3 min</option>
+              <option value="vela" data-background="vela" data-duration="180">Vela · 3 min</option>
+              <option value="rellotge" data-background="rellotge" data-duration="180">Rellotge · 3 min</option>
+              <option value="rellotge_sol" data-background="rellotge_sol" data-duration="180">Rellotge de sol · 3 min</option>
+              <option value="fotos" data-background="fotos" data-duration="180">Fotos en seqüència · 3 min</option>
+            </select>
+            <div class="field-group title-group">
+              <label for="title-input">Títol <span class="label-hint">opcional</span></label>
+              <input id="title-input" type="text" maxlength="48" value="El temps passa" placeholder="Escriu un títol">
+            </div>
+            <label for="custom-media-input" class="upload-label">Afegeix vídeo o fotos</label>
+            <input id="custom-media-input" type="file" accept="video/*,image/*" multiple>
+            <p class="options-help">Tria un vídeo o diverses fotos per mostrar-les en seqüència.</p>
+            <label class="sound-row" for="sound-toggle"><input id="sound-toggle" type="checkbox" checked><span>Avís sonor quan s'acabi el temps</span></label>
+          </div>
+        </details>
+        <div class="panel-inner">
+          <div class="brand-line"><span class="brand-mark" aria-hidden="true"></span><span id="panel-title">El temps passa</span></div>
+          <div class="panel-heading visually-hidden">
+            <p class="eyebrow">EL TEMPS PASSA</p>
+            <h1>Compte <em>enrere.</em></h1>
+            <p class="intro">Un petit espai per mirar passar el temps.</p>
+          </div>
+
+          <div class="time-display">
+            <span class="field-caption">TEMPS RESTANT</span>
+            <output id="remaining-time" class="remaining-time" role="timer" aria-label="Temps restant">00:03:00</output>
+            <div class="progress-track" role="presentation"><div id="progress-fill" class="progress-fill"></div></div>
+          </div>
+
+          <form id="timer-form" class="timer-form" autocomplete="off">
+            <fieldset class="duration-group">
+              <legend>Durada del compte enrere</legend>
+              <div class="duration-fields">
+                <label for="hours-input"><span>HORES</span><input id="hours-input" type="number" inputmode="numeric" min="0" max="99" step="1" value="0"></label>
+                <span class="time-separator" aria-hidden="true">:</span>
+                <label for="minutes-input"><span>MINUTS</span><input id="minutes-input" type="number" inputmode="numeric" min="0" max="59" step="1" value="3"></label>
+                <span class="time-separator" aria-hidden="true">:</span>
+                <label for="seconds-input"><span>SEGONS</span><input id="seconds-input" type="number" inputmode="numeric" min="0" max="59" step="1" value="0"></label>
+              </div>
+            </fieldset>
+            <div class="quick-duration" role="group" aria-label="Durades ràpides">
+              <span class="quick-label">DURADES RÀPIDES</span>
+              <div class="quick-buttons">
+                <button type="button" data-quick-minutes="1" aria-pressed="false">1 min</button>
+                <button type="button" data-quick-minutes="2" aria-pressed="false">2 min</button>
+                <button type="button" data-quick-minutes="5" aria-pressed="false">5 min</button>
+                <button type="button" data-quick-minutes="15" aria-pressed="false">15 min</button>
+              </div>
+            </div>
+
+            <div class="field-group background-group">
+              <label for="background-select">Fons visual</label>
+              <div class="select-wrap">
+                <select id="background-select">
+                  <option value="polaroids" selected>Polaroids del temps</option>
+                  <option value="none">Sense fons · paper cru</option>
+                </select>
+              </div>
+              <p class="field-help">Pots posar un vídeo o una seqüència d'imatges darrere el rellotge.</p>
+            </div>
+
+            <div class="opacity-group">
+              <div class="opacity-heading"><label for="clock-opacity">Opacitat del rellotge</label><output id="opacity-value" for="clock-opacity">70%</output></div>
+              <input id="clock-opacity" type="range" min="0" max="100" step="1" value="70" aria-label="Opacitat del rellotge">
+              <div class="range-labels"><span>TRANSPARENT</span><span>OPAC</span></div>
+            </div>
+
+            <div class="main-actions">
+              <button id="start-button" class="button button-primary" type="button">Comença <span aria-hidden="true">↗</span></button>
+              <button id="pause-button" class="button button-secondary" type="button" disabled>Pausa</button>
+              <button id="reset-button" class="button button-text" type="button">Reinicia</button>
+            </div>
+            <button id="fullscreen-button" class="fullscreen-button" type="button"><span aria-hidden="true">⤢</span> Pantalla completa</button>
+          </form>
+          <section id="marks-section" class="marks-section" aria-labelledby="marks-heading">
+            <div class="marks-headline"><h2 id="marks-heading">Marques d'alumnes</h2><p>Marca el temps quan acaba un alumne.</p></div>
+            <div class="mark-entry">
+              <label class="visually-hidden" for="mark-name">Nom de l'alumne</label>
+              <input id="mark-name" type="text" maxlength="60" placeholder="Nom de l'alumne" autocomplete="off">
+              <button id="add-mark-button" type="button">Marca temps</button>
+            </div>
+            <details id="marks-details" class="marks-details">
+              <summary>Veure marques <span id="marks-count" aria-live="polite">0</span></summary>
+              <div class="marks-body">
+                <label class="ranking-row" for="ranking-toggle"><input id="ranking-toggle" type="checkbox"><span>Mostrar rànquing</span></label>
+                <ol id="marks-list" aria-label="Marques de temps dels alumnes"></ol>
+                <div class="marks-actions">
+                  <button id="export-marks-button" type="button">Exporta les marques</button>
+                  <button id="clear-marks-button" type="button">Esborra-les</button>
+                </div>
+              </div>
+            </details>
+          </section>
+          <p id="timer-status" class="timer-status" role="status" aria-live="polite">A punt per començar.</p>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>
