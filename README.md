@@ -12,13 +12,13 @@ Compte enrere visual per a classe, fet només amb HTML, CSS i JavaScript. No nec
 
 Els noms de les marques es mantenen en aquesta pestanya del navegador. No s'envien a cap servidor. Exporta el CSV abans de tancar la pestanya si els vols conservar.
 
-## Pujar a GitHub Pages
+## Obrir i publicar
 
-Puja **el contingut de la carpeta `dist`** (no la carpeta sencera) a l'arrel del repositori `TEMPUS`: `index.html`, `app.js`, `style.css` i `assets/`. Després, a **Settings → Pages**, tria **Deploy from a branch**, branca `main` i carpeta **/(root)**. No hi ha cap pas de compilació.
+La versió pública és [beilo-byte.github.io/TEMPUS](https://beilo-byte.github.io/TEMPUS/). Aquest repositori ja conté `index.html`, `app.js`, `style.css` i `assets/` a l'arrel, amb GitHub Pages configurat a `main` i **/(root)**. Si fas servir el ZIP en un altre repositori, extreu-lo i puja'n tot el contingut a l'arrel. No hi ha cap pas de compilació.
 
 ## Executar en local
 
-Des de la carpeta `dist`, inicia un servidor estàtic; per exemple:
+Des de la carpeta que conté `index.html`, inicia un servidor estàtic; per exemple:
 
 ```sh
 python3 -m http.server 8000
