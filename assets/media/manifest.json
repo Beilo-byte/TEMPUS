@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "videos": [
+    {
+      "id": "polaroids",
+      "label": "Polaroids del temps",
+      "src": "assets/media/videos/polaroids.mp4",
+      "poster": "assets/media/posters/polaroids.jpg",
+      "duration": 180
+    },
+    {
+      "id": "flor",
+      "label": "Flor que s’obre",
+      "src": "assets/media/videos/flor.mp4",
+      "poster": "assets/media/posters/flor.jpg",
+      "duration": 180
+    },
+    {
+      "id": "posta",
+      "label": "Posta de sol",
+      "src": "assets/media/videos/posta.mp4",
+      "poster": "assets/media/posters/posta.jpg",
+      "duration": 180
+    },
+    {
+      "id": "gel",
+      "label": "Glaçó de gel",
+      "src": "assets/media/videos/gel.mp4",
+      "poster": "assets/media/posters/gel.jpg",
+      "duration": 180
+    },
+    {
+      "id": "vela",
+      "label": "Vela",
+      "src": "assets/media/videos/vela.mp4",
+      "poster": "assets/media/posters/vela.jpg",
+      "duration": 180
+    },
+    {
+      "id": "rellotge",
+      "label": "Rellotge analògic",
+      "src": "assets/media/videos/rellotge.mp4",
+      "poster": "assets/media/posters/rellotge.jpg",
+      "duration": 180
+    },
+    {
+      "id": "rellotge_sol",
+      "label": "Rellotge de sol",
+      "src": "assets/media/videos/rellotge_sol.mp4",
+      "poster": "assets/media/posters/rellotge_sol.jpg",
+      "duration": 180
+    }
+  ],
+  "sequences": [
+    {
+      "id": "fotos",
+      "label": "24 fotografies del temps",
+      "poster": "assets/media/sequence/seq_00.jpg",
+      "frames": [
+        "assets/media/sequence/seq_00.jpg",
+        "assets/media/sequence/seq_01.jpg",
+        "assets/media/sequence/seq_02.jpg",
+        "assets/media/sequence/seq_03.jpg",
+        "assets/media/sequence/seq_04.jpg",
+        "assets/media/sequence/seq_05.jpg",
+        "assets/media/sequence/seq_06.jpg",
+        "assets/media/sequence/seq_07.jpg",
+        "assets/media/sequence/seq_08.jpg",
+        "assets/media/sequence/seq_09.jpg",
+        "assets/media/sequence/seq_10.jpg",
+        "assets/media/sequence/seq_11.jpg",
+        "assets/media/sequence/seq_12.jpg",
+        "assets/media/sequence/seq_13.jpg",
+        "assets/media/sequence/seq_14.jpg",
+        "assets/media/sequence/seq_15.jpg",
+        "assets/media/sequence/seq_16.jpg",
+        "assets/media/sequence/seq_17.jpg",
+        "assets/media/sequence/seq_18.jpg",
+        "assets/media/sequence/seq_19.jpg",
+        "assets/media/sequence/seq_20.jpg",
+        "assets/media/sequence/seq_21.jpg",
+        "assets/media/sequence/seq_22.jpg",
+        "assets/media/sequence/seq_23.jpg"
+      ],
+      "duration": 180
+    }
+  ]
+}
